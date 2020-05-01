@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicStreamingApplication.Pages.MusicPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Searchtoolbar" Icon="search.png" Clicked="Searchtoolbar_OnClicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+       
+        <StackLayout>
+            
+            <ListView x:Name="lvAudioSongs" HasUnevenRows="True" Header="" ItemAppearing="LvAudioSongs_OnItemAppearing" ItemSelected="LvAudioSongs_OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="15,5,15,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding SongFileCover}" HeightRequest="72" WidthRequest="72"/>
+                                <StackLayout Grid.Column="1" Spacing="0">
+                                    <Label Text="{Binding SongName}" TextColor="Black" FontSize="15"/>
+                                    <Label Text="{Binding SingerName}" TextColor="Gray" FontSize="13"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+
+                <ListView.Footer>
+                    <StackLayout  x:Name="SlBottomLoader" HorizontalOptions="Center" Orientation="Horizontal">
+                        <ActivityIndicator WidthRequest="20" HeightRequest="20" IsRunning="True"></ActivityIndicator>
+                        <Label Text="Load More Items"></Label>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            
+            <StackLayout Padding="4" VerticalOptions="End" x:Name="SlAudioPlayer" IsVisible="False">
+                <ProgressBar x:Name="PbAudio"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Image Grid.Column="0" x:Name="ImgSongCover" HeightRequest="30" WidthRequest="30"></Image>
+                    <Label Grid.Column="1" x:Name="LblSongName"></Label>
+                    <Image Grid.Column="2" x:Name="ImgPausePlay" Source="pause.png" HeightRequest="60" WidthRequest="60">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="TapPausePlay" Tapped="TapPausePlay_OnTapped"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+
+
+
+</ContentPage>
